@@ -1,9 +1,50 @@
 This question is worth 1.5 marks
 
 Question:
-Suppose that you are given source code for a DBMS that does not support indexing. This code was extensively tested, so we have a high degree of confidence that it works correctly. Now you were asked to extend the code, such that the indexing is supported. How would you test your extended code to make sure it works properly with indexing? Note that you don't need to provide any additional code for this question, just the answer.
+Suppose that you are given source code for a DBMS that does not support
+indexing. This code was extensively tested, so we have a high degree of
+confidence that it works correctly. Now you were asked to extend the code,
+such that the indexing is supported. How would you test your extended
+code to make sure it works properly with indexing? Note that you don't
+need to provide any additional code for this question, just the answer.
 
 *** It is important to justify / explain your answer ***
 
 Answer:
-... your answer here ...
+The way I will test the extended code to ensure that it works properly
+with indexing is by first verifying that the indexes can be made in the
+first place. This will be done to ensure that the database can create indexes
+without any errors which is the whole point of the indexing function.
+
+Following that, I will then check to see/test if they are
+used correctly in queries, ensuring they can be used in basic queries such
+as insertions, deletions, updates and reading. I'm testing this not only
+because it is a main part of the indexing function but also because
+we need to ensure the index improves in performance compared to not indexing
+in different operations as well as when data is modified/romoved.
+
+I will also then need to ensure that it works with joins as well. This is
+due to joins being common in relational databases and thus I need to ensure
+that indexing will be able to improve the performance of these type of searches.
+
+Once finished with using the index for these tasks, I'll then test to see
+if the index can be dropped without effecting other parts of the
+database/queries to ensure the indexing usability/functionality.
+
+I'll also run some performance tests to confirm whether or not the indexed
+queries are faster than the non-indexed ones. If the non-indexed ones are
+faster than the indexing isn't working as intended.
+
+The last types of tests I'll run on this code to ensure that it is indexing
+correctly is ensure it works properly when dealing with empty tables,
+duplicate tables, very large datasets and unique constraints (If they exist in the database).
+This will be done to ensure that the index works reliably and efficiently
+in different scenarios especially when something unexpected may occur (empty table, etc).
+
+I'll also test to ensure that it provides appropriate error messages when
+given invalid data/inputs as well as potentially stimulate the index
+being corrupted. Doing this will allow for me to be able to tell whether
+the database can handle a corrupted index and will spit out an appropriate
+error message (that I set up) or recovers the corrupted index.
+
+
