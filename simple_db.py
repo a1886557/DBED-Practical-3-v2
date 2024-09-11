@@ -126,7 +126,7 @@ class SimpleDatabase:
         if self.columns is None:
             return []
 
-        # Find column names that have non-None B-trees
+        # Find column names that have B-trees
         indexed_columns = []
         for i in range(len(self.header)):
             if self.b_trees[i] is not None:
