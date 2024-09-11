@@ -31,7 +31,7 @@ class BTree:
         # node and key index in that node
         if x is None:
             x = self.root
-            
+
         i = 0
         while (i < len(x.key_vals)):
             if (k == x.key_vals[i][0]):
@@ -42,7 +42,7 @@ class BTree:
 
         if len(x.children) == 0:
             return None
-            
+
         return self.search_key(k, x.children[i])
 
     # Insert value at key
@@ -106,10 +106,10 @@ def construct_b_tree(array, t = 3):
     for i, x in enumerate(array):
         b_tree.insert_key(x, i)
     return b_tree
-    
+
 def linear_search(array, query_value):
     # input: list of numbers and a value to find
-    # output: list of indices of elements equal to the desired value 
+    # output: list of indices of elements equal to the desired value
     # example: if array = [1, 3, 3, 0] and query_value = 3, result should be [1, 2]
     # don't use any data structures, except lists
     found_indices = []
@@ -117,7 +117,7 @@ def linear_search(array, query_value):
         if (query_value == value):
             found_indices.append(i)
     return found_indices
-    
+
 def generate_data(data_size, max_value):
     array = random.choices(range(max_value), k=data_size)
     verification = {}
@@ -125,45 +125,45 @@ def generate_data(data_size, max_value):
         values = verification.get(value, [])
         values.append(i)
         verification[value] = values
-        
+
     return array, verification
-    
+
 def evaluation(rand_seed = None, max_value = 1000, num_queries = 1000):
     data_sizes = [100, 1000, 10000, 100000];
-    
+
     random.seed(a=rand_seed)
     for data_size in data_sizes:
         array, verification = generate_data(data_size, max_value = max_value)
         b_tree = construct_b_tree(array)
-        
+
         b_tree_time = 0
         linear_time = 0
         for i in range(num_queries):
             query_value = random.randrange(max_value)
-            
+
             start = time.time()
             result = b_tree.search_key(query_value)
             end = time.time()
             b_tree_time += (end - start)
-            
+
             start = time.time()
             linear_indices = linear_search(array, query_value)
             end = time.time()
             linear_time += (end - start)
-            
+
             correct_indices = verification.get(query_value, [])
             b_tree_indices = []
             if result is not None:
                 x = result[0]
                 i = result[1]
                 b_tree_indices = x.key_vals[i][1]
-            
+
             if (correct_indices != b_tree_indices):
                 print(correct_indices)
                 print(b_tree_indices)
                 print("error")
                 return
-            
+
         print("Array size: ", data_size, "; num. queries: ", num_queries)
         print("\tB-tree time: ", round(1000*b_tree_time), " ms")
         print("\tLinear time: ", round(1000*linear_time), " ms")
